@@ -13,7 +13,7 @@ module.exports = {
     },
     createMovie: async (req, res)=>{
         try{
-            await Movie.create({movie: req.body.movieItem, completed: false, userId: req.user.id})
+            await Movie.create({movie: req.body.movieItem, watched: false, userId: req.user.id})
             console.log('Movie has been added!')
             res.redirect('/movies')
         }catch(err){
