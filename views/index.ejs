@@ -7,8 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Create Your VERY OWN Todolist!</h1>
+    <h1>Create Your VERY OWN Movie watch list!</h1>
+
+
+    <h3>Highly recommended:</h3>
+    <ul>
+        <% movies.forEach( el => { %>
+                <li class='movieItem' data-id='<%=el._id%>'>
+                    <span><%= el.movie %></span>
+                </li>
+        <% }) %>    
+    </ul>
+
     <a href="/login"> Login</a>
     <a href="/signup"> Signup</a>
+
+    <script src="js/myMain.js"></script>
 </body>
 </html>
