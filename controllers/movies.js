@@ -6,7 +6,7 @@ module.exports = {
         try{
             const movieItems = await Movie.find({userId:req.user.id})
             const moviesLeft = await Movie.countDocuments({userId:req.user.id,completed: false})
-            res.render('movies.ejs', {movies: movieItems, left: moviesLeft, user: req.user})
+            res.render('autoCompMovies.ejs', {movies: movieItems, left: moviesLeft, user: req.user})
         }catch(err){
             console.log(err)
         }
