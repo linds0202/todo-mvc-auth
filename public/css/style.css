@@ -84,12 +84,26 @@ body {
 h1{
   color: red;
 }
+.movieItem {
+  list-style-type: none;
+}
+.watchedMovie {
+  background-color: aquamarine;
+}
+
+.recommend {
+  background-color: rgb(231, 164, 7);
+}
+
+.unWatchedMovie {
+  background-color: yellow;
+}
+
 .watched{
-  text-decoration: line-through;
-  color: gray;
+  color: red;
 }
 .not{
-  text-decoration: underline;
+  color: green;
 }
 
 /*the container must be positioned relative:*/

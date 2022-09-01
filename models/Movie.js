@@ -9,6 +9,14 @@ const MovieSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  recommend: {
+    type: Boolean,
+    required: true,
+  },
+  // recommend: {
+  //   type: Number, default: 0,
+  //   required: true,
+  // },
   userId: {
     type: String,
     required: true

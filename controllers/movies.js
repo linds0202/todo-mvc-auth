@@ -5,15 +5,15 @@ module.exports = {
         console.log(req.user)
         try{
             const movieItems = await Movie.find({userId:req.user.id})
-            const moviesLeft = await Movie.countDocuments({userId:req.user.id,completed: false})
-            res.render('autoCompMovies.ejs', {movies: movieItems, left: moviesLeft, user: req.user})
+            const moviesLeft = await Movie.countDocuments({userId:req.user.id, watched: false})
+            res.render('movies.ejs', {movies: movieItems, left: moviesLeft, user: req.user})
         }catch(err){
             console.log(err)
         }
     },
     createMovie: async (req, res)=>{
         try{
-            await Movie.create({movie: req.body.movieItem, watched: false, userId: req.user.id})
+            await Movie.create({movie: req.body.movieItem, watched: false, recommend: false, userId: req.user.id})
             console.log('Movie has been added!')
             res.redirect('/movies')
         }catch(err){
@@ -38,6 +38,28 @@ module.exports = {
             })
             console.log('Marked unwatched')
             res.json('Marked unwatched')
+        }catch(err){
+            console.log(err)
+        }
+    },
+    // recommendMovie: async (req, res)=>{
+    //     try{
+    //         await Movie.updateOne({_id:req.body.movieIdFromJSFile}, {
+    //             $inc: { recommend: 1 }
+    //     })
+    //         console.log('Incresed recommend by 1')
+    //         res.json('Incresed recommend by 1')
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // },
+    recommendMovie: async (req, res)=>{
+        try{
+            await Movie.updateOne({_id:req.body.movieIdFromJSFile}, {
+                recommend: true
+            })
+            console.log('Incresed recommend by 1')
+            res.json('Incresed recommend by 1')
         }catch(err){
             console.log(err)
         }

@@ -11,6 +11,8 @@ router.put('/markWatched', moviesController.markWatched)
 
 router.put('/markUnWatched', moviesController.markUnWatched)
 
+router.put('/recommendMovie', moviesController.recommendMovie)
+
 router.delete('/deleteMovie', moviesController.deleteMovie)
 
 module.exports = router

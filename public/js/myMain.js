@@ -1,20 +1,36 @@
 const deleteBtn = document.querySelectorAll('.del')
-const movieItem = document.querySelectorAll('span.not')
-const movieWatched = document.querySelectorAll('span.watched')
+const watchedBtn = document.querySelectorAll('.watchedMovie')
+const unWatchedBtn = document.querySelectorAll('.unWatchedMovie')
+const recommendBtn = document.querySelectorAll('.recommend')
 
-//let movieList = []
+
+// const movieItem = document.querySelectorAll('span.not')
+// const movieWatched = document.querySelectorAll('span.watched')
+
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteMovie)
 })
 
-Array.from(movieItem).forEach((el)=>{
+Array.from(watchedBtn).forEach((el)=>{
     el.addEventListener('click', markWatched)
 })
 
-Array.from(movieWatched).forEach((el)=>{
+Array.from(unWatchedBtn).forEach((el)=>{
     el.addEventListener('click', markUnWatched)
 })
+
+Array.from(recommendBtn).forEach((el)=>{
+    el.addEventListener('click', recommendMovie)
+})
+
+// Array.from(movieItem).forEach((el)=>{
+//     el.addEventListener('click', markWatched)
+// })
+
+// Array.from(movieWatched).forEach((el)=>{
+//     el.addEventListener('click', markUnWatched)
+// })
 
 async function deleteMovie(){
     const movieId = this.parentNode.dataset.id
@@ -56,6 +72,25 @@ async function markUnWatched(){
     const movieId = this.parentNode.dataset.id
     try{
         const response = await fetch('movies/markUnWatched', {
+            method: 'put',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                'movieIdFromJSFile': movieId
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function recommendMovie(){
+    //console.log('recommend clicked')
+    const movieId = this.parentNode.dataset.id
+    try{
+        const response = await fetch('movies/recommendMovie', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
